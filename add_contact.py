@@ -15,10 +15,10 @@ def addContact():
     return phone_book
 
 
-def header(data):
-    with open ('phone_book.csv', 'w', newline='', encoding='utf-8') as book:
-        writer = csv.writer(book, delimiter = ';')
-        writer.writerow(data.keys())
+#def header(data):
+#    with open ('phone_book.csv', 'a', newline='', encoding='utf-8') as book:
+#        writer = csv.writer(book, delimiter = ';')
+#        writer.writerow(data.keys())
 
 def saveContact(data):
     with open ('phone_book.csv', 'a', newline='', encoding='utf-8') as book:
@@ -26,7 +26,7 @@ def saveContact(data):
         writer.writerow(data.values())
 
 
-header({'Фамилия': '', 'Имя': '', 'Телефон': '', 'Описание': '',})
+#header({'Фамилия': '', 'Имя': '', 'Телефон': '', 'Описание': '',})
 for i in range (8):
     saveContact(addContact())
 
