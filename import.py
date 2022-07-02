@@ -1,25 +1,32 @@
 import csv
 
 def import_data(data):
-    with open('phone_book.csv', 'a', encoding='utf-8') as pb:
-        file_writer = csv.writer(pb, delimiter = ";", lineterminator="\r")
+    with open('file_import.txt', 'r') as file_im, open('phone_book.csv', 'a') as pb:
+        contact = [line.strip('\n') for line in file_im]
+        count = 0
         if data == True:
-            phone_book = {'Фамилия': '', 'Имя': '', 'Телефон': '', 'Описание': '',}
-            for key in phone_book:
-                phone_book[key] = input(f'{key.upper()}: ').capitalize()
-                if key.lower() in ['фамилия', 'имя', 'описание']:
-                    while len(phone_book[key]) > 32:
-                        print("Значение превышает допустимый лимит")
-                        phone_book[key] = input(f'{key.upper()}: ').capitalize()
+            for i in contact:
+                if len(i.split(';')) == 4:
+                    for j in i.split(';'):
+                        pb.write(f'{j}\n')
+                    pb.write('\n')
                 else:
-                    while not phone_book['Телефон'].isdigit():
-                        print ('Номер должен содержать только цифры')
-                        phone_book[key] = input(f'{key}: ')
-            writer = csv.writer(pb, delimiter=';')
-            writer.writerow(phone_book.values())
+                    if count == 4:
+                        count = 0
+                    if count != 4:
+                        pb.write(f'{i}\n')
+                        count += 1
         else:
-            print("Фамилия: Имя: Телефон: Описание: ")
-            contact = list(input('Заполните поля по указанной выше форме: ').split())
-            file_writer.writerow(contact)
+            for i in contact:
+                if len(i.split(';')) == 4:
+                    pb.write(f'{i}' + '\n')
+                else:
+                    if count == 4:
+                        pb.write('\n')
+                        count = 0
+                    elif count != 4:
+                        pb.write(f'{i}')
+                        count += 1
 
-import_data(False)
+import_data(True)
+                    
