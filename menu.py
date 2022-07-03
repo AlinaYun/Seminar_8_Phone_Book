@@ -7,3 +7,4 @@ def menu():
         print(f'{i+1}. {menu_options[i].upper()}')
     print()
     
+#menu()

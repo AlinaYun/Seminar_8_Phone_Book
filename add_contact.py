@@ -1,6 +1,7 @@
 import csv
+import os
 
-def addContact():
+def add_contact():
     phone_book = {'Фамилия': '', 'Имя': '', 'Телефон': '', 'Описание': '',}
     for key in phone_book:
         phone_book[key] = input(f'{key.upper()}: ').capitalize()
@@ -15,20 +16,21 @@ def addContact():
     return phone_book
 
 
-#def header(data):
-#    with open ('phone_book.csv', 'a', newline='', encoding='utf-8') as book:
-#        writer = csv.writer(book, delimiter = ';')
-#        writer.writerow(data.keys())
+def header():
+    with open ('phone_book.csv', 'w', newline='', encoding='utf-8') as book:
+        header_names = ['Фамилия', 'Имя', 'Телефон', 'Описание']
+        writer = csv.DictWriter(book, delimiter = ';',lineterminator = "\r", fieldnames = header_names)
+        writer.writeheader()
 
-def saveContact(data):
+def save_contact(data):
     with open ('phone_book.csv', 'a', newline='', encoding='utf-8') as book:
         writer = csv.writer(book, delimiter=';')
+        if os.stat("phone_book.csv").st_size == 0:  #проверка файла на пустоту
+            writer.writerow(data.keys())
         writer.writerow(data.values())
 
+save_contact(add_contact())
 
-#header({'Фамилия': '', 'Имя': '', 'Телефон': '', 'Описание': '',})
-for i in range (8):
-    saveContact(addContact())
 
 
 
