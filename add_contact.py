@@ -28,8 +28,8 @@ def save_contact(data):
         if os.stat("phone_book.csv").st_size == 0:  #проверка файла на пустоту
             writer.writerow(data.keys())
         writer.writerow(data.values())
+    print('Контакт сохранен')
 
-save_contact(add_contact())
 
 
 
