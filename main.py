@@ -3,6 +3,8 @@ from add_contact import save_contact, add_contact, header
 from export import export_data
 from import_cont import import_data
 from del_cont import delete_contact
+from change_contact import change_contact
+
 
 def phone_book():
     user_input = 'random'
@@ -12,7 +14,7 @@ def phone_book():
         if user_input == '1':
             save_contact(add_contact())
         elif user_input == '2':
-            pass
+            change_contact()
         elif user_input == '3':
             export_data()
         elif user_input == '4':
@@ -20,7 +22,5 @@ def phone_book():
         elif user_input == '5':
             delete_contact()
 
+
 phone_book()
-
-
-
